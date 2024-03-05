@@ -60,6 +60,8 @@
             this.chineseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtchangetime = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -318,7 +320,7 @@
             this.SelectFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.SelectFile.Location = new System.Drawing.Point(44, 231);
             this.SelectFile.Name = "SelectFile";
-            this.SelectFile.Size = new System.Drawing.Size(333, 35);
+            this.SelectFile.Size = new System.Drawing.Size(227, 85);
             this.SelectFile.TabIndex = 113;
             this.SelectFile.Text = "选择文件";
             this.SelectFile.UseVisualStyleBackColor = false;
@@ -329,7 +331,7 @@
             // Build
             // 
             this.Build.Font = new System.Drawing.Font("Segoe UI Emoji", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Build.Location = new System.Drawing.Point(97, 347);
+            this.Build.Location = new System.Drawing.Point(82, 382);
             this.Build.Name = "Build";
             this.Build.Size = new System.Drawing.Size(124, 44);
             this.Build.TabIndex = 114;
@@ -341,9 +343,9 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip1.Location = new System.Drawing.Point(0, 405);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 457);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(877, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(887, 25);
             this.toolStrip1.TabIndex = 115;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -383,7 +385,7 @@
             this.languageToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(877, 32);
+            this.menuStrip1.Size = new System.Drawing.Size(887, 32);
             this.menuStrip1.TabIndex = 119;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -417,12 +419,36 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(177, 34);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // txtchangetime
+            // 
+            this.txtchangetime.BackColor = System.Drawing.Color.White;
+            this.txtchangetime.Enabled = false;
+            this.txtchangetime.Font = new System.Drawing.Font("Segoe UI Emoji", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtchangetime.Location = new System.Drawing.Point(600, 397);
+            this.txtchangetime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtchangetime.Name = "txtchangetime";
+            this.txtchangetime.Size = new System.Drawing.Size(224, 31);
+            this.txtchangetime.TabIndex = 123;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Emoji", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(429, 402);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 24);
+            this.label1.TabIndex = 122;
+            this.label1.Text = "修改时间:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(877, 430);
+            this.ClientSize = new System.Drawing.Size(887, 482);
+            this.Controls.Add(this.txtchangetime);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.signatureFile);
             this.Controls.Add(this.toolStrip1);
@@ -496,6 +522,8 @@
         private System.Windows.Forms.ToolStripMenuItem chineseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.TextBox txtchangetime;
+        private System.Windows.Forms.Label label1;
     }
 }
 

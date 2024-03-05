@@ -38,14 +38,17 @@ namespace SharpThief
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     var fileVersionInfo = FileVersionInfo.GetVersionInfo(openFileDialog.FileName);
-
+                    FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
                     txtOriginalFilename.Text = fileVersionInfo.InternalName ?? string.Empty;
                     txtDescription.Text = fileVersionInfo.FileDescription ?? string.Empty;
                     txtCompany.Text = fileVersionInfo.CompanyName ?? string.Empty;
                     txtProduct.Text = fileVersionInfo.ProductName ?? string.Empty;
                     txtCopyright.Text = fileVersionInfo.LegalCopyright ?? string.Empty;
                     txtTrademarks.Text = fileVersionInfo.LegalTrademarks ?? string.Empty;
+                   
 
+                   
+                    txtchangetime.Text = fileInfo.LastWriteTime.ToString();
                     var version = fileVersionInfo.FileMajorPart;
                     txtFileVersion.Text = $"{fileVersionInfo.FileMajorPart.ToString()}.{fileVersionInfo.FileMinorPart.ToString()}.{fileVersionInfo.FileBuildPart.ToString()}.{fileVersionInfo.FilePrivatePart.ToString()}";
                     txtProductVersion.Text = $"{fileVersionInfo.FileMajorPart.ToString()}.{fileVersionInfo.FileMinorPart.ToString()}.{fileVersionInfo.FileBuildPart.ToString()}.{fileVersionInfo.FilePrivatePart.ToString()}";
@@ -167,48 +170,52 @@ namespace SharpThief
                 string tempPath = Path.GetTempPath();
                 string randomFileName = Path.GetRandomFileName() + ".exe";
                 string fullPath = Path.Combine(tempPath, randomFileName);
-
-                File.WriteAllBytes(fullPath, File.ReadAllBytes(SelectFile.Tag.ToString()));
-
-                //Console.WriteLine($"文件已成功写入: {fullPath}");
-
-                using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
+                if(SelectFile.Text!="选择文件"&& SelectFile.Text != "SelectFile")
                 {
-                    saveFileDialog1.Filter = ".exe (*.exe)|*.exe";
-                    saveFileDialog1.InitialDirectory = Application.StartupPath;
-                    saveFileDialog1.OverwritePrompt = false;
-                    saveFileDialog1.FileName = "Client";
-                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    File.WriteAllBytes(fullPath, File.ReadAllBytes(SelectFile.Tag.ToString()));
+                    using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
                     {
+                        saveFileDialog1.Filter = ".exe (*.exe)|*.exe";
+                        saveFileDialog1.InitialDirectory = Application.StartupPath;
+                        saveFileDialog1.OverwritePrompt = false;
+                        saveFileDialog1.FileName = "Client";
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
 
-                        if (chkIcon.Checked && !string.IsNullOrEmpty(toolStrip1.Text))
-                        {
-                            IconInjector.InjectIcon(fullPath, toolStrip1.Text);
-                           
+                            if (chkIcon.Checked && !string.IsNullOrEmpty(toolStrip1.Text))
+                            {
+                                IconInjector.InjectIcon(fullPath, toolStrip1.Text);
+
+                            }
+                            Thread.Sleep(500);
+                            if (btnAssembly.Checked)
+                            {
+                                WriteAssembly(fullPath);
+                            }
+                            Thread.Sleep(500);
+                            if (checkBox1.Checked)
+                            {
+                                var cert = new PEFileInfo().CopyCert(signatureFile.Tag.ToString());
+                                new PEFileInfo().WriteCert(cert, fullPath, saveFileDialog1.FileName);
+                            }
+                            if (txtchangetime.Text.Length > 0)
+                            {
+                                string[] Time = txtchangetime.Text.Split(new char[] { ' ' }, StringSplitOptions.None);
+                                new ChangeTime().changeTime(saveFileDialog1.FileName, Time[0], Time[1]);
+                            }
+                            if (File.Exists(saveFileDialog1.FileName))
+                            {
+                                MessageBox.Show("Build sucessfully!", "Builder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Build Error!", "Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            File.Delete(fullPath);
                         }
-                        Thread.Sleep(500);
-                        if (btnAssembly.Checked)
-                        {
-                            WriteAssembly(fullPath);
-                        }
-                        Thread.Sleep(500);
-                        if (checkBox1.Checked)
-                        {
-                            var cert = new PEFileInfo().CopyCert(signatureFile.Tag.ToString());
-                            new PEFileInfo().WriteCert(cert, fullPath, saveFileDialog1.FileName);
-                        }
-                        if (File.Exists(saveFileDialog1.FileName))
-                        {
-                            MessageBox.Show("Build sucessfully!", "Builder", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Build Error!", "Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        File.Delete(fullPath);
                     }
                 }
-
+               
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -227,6 +234,7 @@ namespace SharpThief
                 txtOriginalFilename.Enabled = true;
                 txtProductVersion.Enabled = true;
                 txtFileVersion.Enabled = true;
+                txtchangetime.Enabled = true;
             }
             else
             {
@@ -240,6 +248,7 @@ namespace SharpThief
                 txtOriginalFilename.Enabled = false;
                 txtProductVersion.Enabled = false;
                 txtFileVersion.Enabled = false;
+                txtchangetime.Enabled = false;
             }
         }
 
@@ -300,6 +309,7 @@ namespace SharpThief
                         label13.Text = "ProductVersion:";
                         label14.Text = "FileVersion:";
                         btnClone.Text = "Clone";
+                        txtchangetime.Text = "ChangeTime";
                         Properties.Settings.Default.Save();
                         break;
                     }
@@ -321,6 +331,7 @@ namespace SharpThief
                         label13.Text = "产品版本号:";
                         label14.Text = "文件版本号:";
                         btnClone.Text = "克隆";
+                        txtchangetime.Text = "修改时间";
                         Properties.Settings.Default.Save();
                         break;
                     }
