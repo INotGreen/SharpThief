@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IconExtractor</name>
+    </assembly>
+    <members>
+        <member name="T:Toolbelt.Drawing.IconExtractor">
+            <summary>
+            Extract .ico file
+            </summary>
+        </member>
+        <member name="M:Toolbelt.Drawing.IconExtractor.Extract1stIconTo(System.String,System.IO.Stream)">
+            <summary>
+            Extract first .ico file from Win32 resource of PE format file (.exe, .dll).
+            </summary>
+            <param name="sourceFile">path of PE format file to extract .ico file</param>
+            <param name="stream">stream that written to .ico file which is extracted.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,11 @@
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\bin\Release\SharpThief.exe.config
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\bin\Release\SharpThief.exe
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\bin\Release\SharpThief.pdb
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\obj\Release\SharpThief.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\obj\Release\SharpThief.Form1.resources
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\obj\Release\SharpThief.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\obj\Release\SharpThief.csproj.GenerateResource.cache
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\obj\Release\SharpThief.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\obj\Release\SharpThief.csproj.Fody.CopyLocal.cache
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\obj\Release\SharpThief.exe
+C:\Users\Lenovo\Desktop\SharpThief\SharpThief\obj\Release\SharpThief.pdb
