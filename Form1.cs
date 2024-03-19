@@ -45,9 +45,9 @@ namespace SharpThief
                     txtProduct.Text = fileVersionInfo.ProductName ?? string.Empty;
                     txtCopyright.Text = fileVersionInfo.LegalCopyright ?? string.Empty;
                     txtTrademarks.Text = fileVersionInfo.LegalTrademarks ?? string.Empty;
-                   
 
-                   
+
+
                     txtchangetime.Text = fileInfo.LastWriteTime.ToString();
                     var version = fileVersionInfo.FileMajorPart;
                     txtFileVersion.Text = $"{fileVersionInfo.FileMajorPart.ToString()}.{fileVersionInfo.FileMinorPart.ToString()}.{fileVersionInfo.FileBuildPart.ToString()}.{fileVersionInfo.FilePrivatePart.ToString()}";
@@ -72,6 +72,7 @@ namespace SharpThief
                         toolStrip1.Text = ico;
                         toolStrip1.ForeColor = Color.DarkGreen;
                         picIcon.ImageLocation = ico;
+                        MessageBox.Show(picIcon.ImageLocation);
                     }
                     else
                     {
@@ -145,11 +146,11 @@ namespace SharpThief
                     .SetFileType(Ressy.HighLevel.Versions.FileType.Application)
                     .SetAttribute(VersionAttributeName.FileDescription, txtDescription.Text)
                     .SetAttribute(VersionAttributeName.CompanyName, txtCompany.Text)
-                       //  .SetAttribute(VersionAttributeName.LegalTrademark, txtTrademarks.Text)
+                    //  .SetAttribute(VersionAttributeName.LegalTrademark, txtTrademarks.Text)
                     .SetAttribute(VersionAttributeName.OriginalFilename, txtOriginalFilename.Text)
                     .SetAttribute(VersionAttributeName.ProductName, txtProduct.Text)
                     .SetAttribute(VersionAttributeName.LegalCopyright, txtCopyright.Text)
-               
+
                     .SetFileOperatingSystem(FileOperatingSystem.WindowsNT)
                      .SetFileSubType(Ressy.HighLevel.Versions.FileSubType.Unknown)
                     .Build();
@@ -166,11 +167,11 @@ namespace SharpThief
         {
             try
             {
-               
+
                 string tempPath = Path.GetTempPath();
                 string randomFileName = Path.GetRandomFileName() + ".exe";
                 string fullPath = Path.Combine(tempPath, randomFileName);
-                if(SelectFile.Text!="选择文件"&& SelectFile.Text != "SelectFile")
+                if (SelectFile.Text != "选择文件" && SelectFile.Text != "SelectFile")
                 {
                     File.WriteAllBytes(fullPath, File.ReadAllBytes(SelectFile.Tag.ToString()));
                     using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
@@ -215,7 +216,7 @@ namespace SharpThief
                         }
                     }
                 }
-               
+
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -275,7 +276,7 @@ namespace SharpThief
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
             {
                 signatureFile.Enabled = true;
             }
@@ -361,7 +362,7 @@ namespace SharpThief
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 foreach (string file in files)
                 {
-                    
+
                     SelectFile.Text = Path.GetFileName(file);
                     SelectFile.Tag = file;
                     SelectFile.ForeColor = Color.Red;
@@ -379,6 +380,21 @@ namespace SharpThief
             {
                 e.Effect = DragDropEffects.Copy;
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (picIcon.ImageLocation != null && !string.IsNullOrEmpty(picIcon.ImageLocation))
+            {
+
+                File.Copy(picIcon.ImageLocation, Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\{Path.GetFileName(picIcon.ImageLocation)}");
+                MessageBox.Show("Buid Successful!");
+            }
+            else
+            {
+                MessageBox.Show("Please select an icon first");
+            }
+
         }
     }
 }
